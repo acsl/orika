@@ -723,6 +723,11 @@ public class DefaultMapperFactory implements MapperFactory, Reportable {
     public Mapper<Object, Object> lookupMapper(MapperKey mapperKey, MappingContext context) {
         
         Mapper<?, ?> mapper = getRegisteredMapper(mapperKey.getAType(), mapperKey.getBType(), false);
+
+        if (mapper == null){
+          mapper = getRegisteredMapper(TypeFactory.valueOf(java.util.Map.class), mapperKey.getBType(), false);
+        }
+
         if (mapper == null && useAutoMapping) {
             synchronized (this) {
                 mapper = getRegisteredMapper(mapperKey.getAType(), mapperKey.getBType(), false);

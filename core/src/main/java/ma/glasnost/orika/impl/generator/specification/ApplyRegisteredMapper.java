@@ -24,6 +24,8 @@ import ma.glasnost.orika.impl.generator.VariableRef;
 import ma.glasnost.orika.metadata.FieldMap;
 import ma.glasnost.orika.metadata.MapperKey;
 import ma.glasnost.orika.metadata.Type;
+import ma.glasnost.orika.metadata.TypeFactory;
+
 
 /**
  * ApplyRegisteredMapper looks for a registered mapper which supports
@@ -32,7 +34,9 @@ import ma.glasnost.orika.metadata.Type;
 public class ApplyRegisteredMapper extends ObjectToObject {
 
     public boolean appliesTo(FieldMap fieldMap) {
-        return mapperFactory.existsRegisteredMapper(fieldMap.getAType(), fieldMap.getBType(), false);
+
+        return mapperFactory.existsRegisteredMapper(fieldMap.getAType(), fieldMap.getBType(), false) ||
+              mapperFactory.existsRegisteredMapper(TypeFactory.valueOf(java.util.Map.class), fieldMap.getBType(), false);
     }
     
     public String generateMappingCode(FieldMap fieldMap, VariableRef source, VariableRef destination, SourceCodeContext code) {
@@ -42,9 +46,15 @@ public class ApplyRegisteredMapper extends ObjectToObject {
                     new MapperKey(source.type(), destination.type()));
             Type<?> sourceType;
             Type<?> destType;
-            if (mapper.getAType().isAssignableFrom(source.type())) {
-                sourceType = mapper.getAType();
-                destType = mapper.getBType();
+            if (mapper.getAType().isAssignableFrom(source.type()))
+            {
+              sourceType = mapper.getAType();
+              destType = mapper.getBType();
+            }
+            else if (mapper.getAType().equals(TypeFactory.valueOf(java.util.Map.class))){
+              sourceType = TypeFactory.valueOf(java.util.Map.class);
+              destType = mapper.getBType();
+
             } else {
                 sourceType = mapper.getBType();
                 destType = mapper.getAType();
