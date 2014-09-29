@@ -146,9 +146,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.12.4</version>
 				<configuration>
-          <includes>
-            <include>**/NestedMapsTestCase.java</include>
-          </includes>
 					<testClassesDirectory>${project.build.outputDirectory}</testClassesDirectory>
 					<outputDirectory>${basedir}/target/surefire-reports</outputDirectory>
 					<systemPropertyVariables>
