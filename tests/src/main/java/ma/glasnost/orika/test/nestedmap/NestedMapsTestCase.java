@@ -2,6 +2,8 @@ package ma.glasnost.orika.test.nestedmap;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
+import ma.glasnost.orika.impl.DefaultMapperFactory;
+import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.test.MappingUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -57,6 +59,46 @@ public class NestedMapsTestCase
     public void setAddress(AddressDO address){this.address = address;}
   }
 
+  public static class CityDTO
+  {
+    private Integer postalCode = Integer.MAX_VALUE;
+    private String city ="notNull";
+
+    public Integer getPostalCode(){return postalCode;}
+    public void setPostalCode(Integer postalCode){this.postalCode = postalCode;}
+    public String getCity(){return city;}
+    public void setCity(String city){this.city = city;}
+  }
+
+  public static class AddressDTO
+  {
+    private String street = "notNull";
+    private Integer houseNumber = Integer.MAX_VALUE;
+    private CityDTO city;
+
+    public String getStreet(){return street;}
+    public void setStreet(String street){this.street = street;}
+    public Integer getHouseNumber(){return houseNumber;}
+    public void setHouseNumber(Integer houseNumber){this.houseNumber = houseNumber;}
+    public CityDTO getCity(){return city;}
+    public void setCity(CityDTO city){this.city = city;}
+  }
+
+  public static class PersonDTO
+  {
+    private String firstname = "notNull";
+    private String lastname = "notNull";
+    private AddressDTO address;
+
+    public String getFirstname(){return firstname;}
+    public void setFirstname(String firstname){this.firstname = firstname;}
+    public String getLastname(){return lastname;}
+    public void setLastname(String lastname){this.lastname = lastname;}
+    public AddressDTO getAddress(){return address;}
+    public void setAddress(AddressDTO address){this.address = address;}
+  }
+
+
   @Test
   public void testNestedMapToObject()
   {
@@ -77,10 +119,15 @@ public class NestedMapsTestCase
 
     MapperFactory mapperFactory = MappingUtil.getMapperFactory();
 
-    mapperFactory.classMap(java.util.Map.class, PersonDO.class).mapNulls(true).byDefault().register();
-    mapperFactory.classMap(java.util.Map.class,AddressDO.class).mapNulls(true).byDefault().register();
-    mapperFactory.classMap(java.util.Map.class,CityDO.class).mapNulls(true).byDefault().register();
+    //MapperFactory mapperFactory = new DefaultMapperFactory.Builder().compilerStrategy(new EclipseJdtCompilerStrategy()).build();
 
+    mapperFactory.classMap(java.util.Map.class,CityDO.class).mapNulls(true).byDefault().register();
+    mapperFactory.classMap(java.util.Map.class,AddressDO.class).mapNulls(true).byDefault().register();
+    mapperFactory.classMap(java.util.Map.class, PersonDO.class).mapNulls(true).byDefault().register();
+
+    //mapperFactory.classMap(CityDTO.class,CityDO.class).mapNulls(true).byDefault().register();
+    //mapperFactory.classMap(AddressDTO.class,AddressDO.class).mapNulls(true).byDefault().register();
+    //mapperFactory.classMap(PersonDTO.class, PersonDO.class).mapNulls(true).byDefault().register();
 
 
     MapperFacade mapper = mapperFactory.getMapperFacade();

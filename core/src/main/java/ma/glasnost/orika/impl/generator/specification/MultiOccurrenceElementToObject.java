@@ -33,8 +33,10 @@ import ma.glasnost.orika.metadata.TypeFactory;
 public class MultiOccurrenceElementToObject extends AbstractSpecification {
 
     public boolean appliesTo(FieldMap fieldMap) {
-        return (fieldMap.getSource().isMapKey() || fieldMap.getSource().isArrayElement() || fieldMap.getSource().isListElement())
-                && (TypeFactory.TYPE_OF_OBJECT.equals(fieldMap.getSource().getType()));
+     //   return (fieldMap.getSource().isMapKey() || fieldMap.getSource().isArrayElement() || fieldMap.getSource().isListElement())
+     //           && (TypeFactory.TYPE_OF_OBJECT.equals(fieldMap.getSource().getType()));
+      return (fieldMap.getSource().isArrayElement() || fieldMap.getSource().isListElement())
+          && (TypeFactory.TYPE_OF_OBJECT.equals(fieldMap.getSource().getType()));
     }
 
     public String generateMappingCode(FieldMap fieldMap, VariableRef source, VariableRef destination, SourceCodeContext code) {
