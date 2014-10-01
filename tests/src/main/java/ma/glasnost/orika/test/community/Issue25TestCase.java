@@ -68,6 +68,7 @@ public class Issue25TestCase extends BaseManufacturingFacilityTest{
 
     @After
     public void tearDown() throws Exception {
+      System.clearProperty(OrikaSystemProperties.COMPILER_STRATEGY);
     }
 
     @Test
