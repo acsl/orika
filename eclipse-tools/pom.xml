@@ -11,13 +11,13 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>orika-parent</artifactId>
-		<groupId>ma.glasnost.orika</groupId>
+		<artifactId>ga2-orika-parent</artifactId>
+		<groupId>com.acslworld.ga2</groupId>
 		<version>1.4.6-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>orika-eclipse-tools</artifactId>
+	<artifactId>ga2-orika-eclipse-tools</artifactId>
 	<name>Orika - eclipse-jdt Dependencies</name>
 
 	<description>Optional Eclipse JDT compiler dependencies for Orika Bean Mapper.

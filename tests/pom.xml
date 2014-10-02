@@ -11,27 +11,27 @@
 
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<artifactId>orika-parent</artifactId>
-		<groupId>ma.glasnost.orika</groupId>
+		<artifactId>ga2-orika-parent</artifactId>
+		<groupId>com.acslworld.ga2</groupId>
 		<version>1.4.6-SNAPSHOT</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>orika-tests</artifactId>
+	<artifactId>ga2-orika-tests</artifactId>
 	<name>Orika - tests</name>
 
 
 	<dependencies>
 
 		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-core</artifactId>
+			<groupId>com.acslworld.ga2</groupId>
+			<artifactId>ga2-orika-core</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>ma.glasnost.orika</groupId>
-			<artifactId>orika-eclipse-tools</artifactId>
+			<groupId>com.acslworld.ga2</groupId>
+			<artifactId>ga2-orika-eclipse-tools</artifactId>
 			<version>${project.parent.version}</version>
 			<scope>compile</scope>
 			<exclusions>
