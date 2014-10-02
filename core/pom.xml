@@ -92,6 +92,7 @@
 		</plugins>
 	</build>
 
+  <!-- deploy to our nexus -->
   <distributionManagement>
     <repository>
       <id>releases</id>
