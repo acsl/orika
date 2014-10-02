@@ -409,4 +409,18 @@
 		</profile>
 	</profiles>
 
+  <!-- deploy to our nexus -->
+  <distributionManagement>
+    <repository>
+      <id>releases</id>
+      <url>${releases.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>snapshots</id>
+      <uniqueVersion>false</uniqueVersion>
+      <url>${snapshots.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+
 </project>
