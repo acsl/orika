@@ -140,7 +140,15 @@ public abstract class BuiltinConverters {
         converterFactory.registerConverter(new NumericConverters.DoubleToShortConverter(false));
         converterFactory.registerConverter(new NumericConverters.DoubleToIntegerConverter(false));
         converterFactory.registerConverter(new NumericConverters.DoubleToLongConverter(false));
-        
+
+        /*
+         *
+         */
+        converterFactory.registerConverter(new ObjectToIntegerConverter());
+        converterFactory.registerConverter(new ObjectToDoubleConverter());
+        converterFactory.registerConverter(new ObjectToBooleanConverter());
+        converterFactory.registerConverter(new ObjectToDateConverter());
+
         /*
          * Register additional common "immutable" types
          */
