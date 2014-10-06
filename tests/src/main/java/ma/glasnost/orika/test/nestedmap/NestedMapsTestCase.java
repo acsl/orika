@@ -2,12 +2,11 @@ package ma.glasnost.orika.test.nestedmap;
 
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.impl.DefaultMapperFactory;
-import ma.glasnost.orika.impl.generator.EclipseJdtCompilerStrategy;
 import ma.glasnost.orika.test.MappingUtil;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,121 +19,162 @@ import java.util.Map;
 
 public class NestedMapsTestCase
 {
-  public static class CityDO
+  public static class ExampleDTO
   {
-    private Integer postalCode = Integer.MAX_VALUE;
-    private String city ="notNull";
+    private String aString;
+    private Integer anInteger;
+    private Double aDouble;
+    private Boolean aBoolean;
 
-    public Integer getPostalCode(){return postalCode;}
-    public void setPostalCode(Integer postalCode){this.postalCode = postalCode;}
-    public String getCity(){return city;}
-    public void setCity(String city){this.city = city;}
+    public ExampleDTO getChildDTO()
+    {
+      return childDTO;
+    }
+
+    public void setChildDTO(ExampleDTO childDTO)
+    {
+      this.childDTO = childDTO;
+    }
+
+    private ExampleDTO childDTO;
+
+    public Date getaDate()
+    {
+      return aDate;
+    }
+
+    public void setaDate(Date aDate)
+    {
+      this.aDate = aDate;
+    }
+
+    private Date aDate;
+
+    public String getaString()
+    {
+      return aString;
+    }
+
+    public void setaString(String aString)
+    {
+      this.aString = aString;
+    }
+
+    public Integer getAnInteger()
+    {
+      return anInteger;
+    }
+
+    public void setAnInteger(Integer anInteger)
+    {
+      this.anInteger = anInteger;
+    }
+
+    public Double getaDouble()
+    {
+      return aDouble;
+    }
+
+    public void setaDouble(Double aDouble)
+    {
+      this.aDouble = aDouble;
+    }
+
+    public Boolean getaBoolean()
+    {
+      return aBoolean;
+    }
+
+    public void setaBoolean(Boolean aBoolean)
+    {
+      this.aBoolean = aBoolean;
+    }
   }
 
-  public static class AddressDO
+  public static class ExampleDO
   {
-    private String street = "notNull";
-    private Integer houseNumber = Integer.MAX_VALUE;
-    private CityDO city;
+    private String aString;
+    private Integer anInteger;
+    private Double aDouble;
+    private Boolean aBoolean;
 
-    public String getStreet(){return street;}
-    public void setStreet(String street){this.street = street;}
-    public Integer getHouseNumber(){return houseNumber;}
-    public void setHouseNumber(Integer houseNumber){this.houseNumber = houseNumber;}
-    public CityDO getCity(){return city;}
-    public void setCity(CityDO city){this.city = city;}
-  }
+    public String getaString()
+    {
+      return aString;
+    }
 
-  public static class PersonDO
-  {
-    private String firstname = "notNull";
-    private String lastname = "notNull";
-    private AddressDO address;
+    public void setaString(String aString)
+    {
+      this.aString = aString;
+    }
 
-    public String getFirstname(){return firstname;}
-    public void setFirstname(String firstname){this.firstname = firstname;}
-    public String getLastname(){return lastname;}
-    public void setLastname(String lastname){this.lastname = lastname;}
-    public AddressDO getAddress(){return address;}
-    public void setAddress(AddressDO address){this.address = address;}
-  }
+    public Integer getAnInteger()
+    {
+      return anInteger;
+    }
 
-  public static class CityDTO
-  {
-    private Integer postalCode = Integer.MAX_VALUE;
-    private String city ="notNull";
+    public void setAnInteger(Integer anInteger)
+    {
+      this.anInteger = anInteger;
+    }
 
-    public Integer getPostalCode(){return postalCode;}
-    public void setPostalCode(Integer postalCode){this.postalCode = postalCode;}
-    public String getCity(){return city;}
-    public void setCity(String city){this.city = city;}
-  }
+    public Double getaDouble()
+    {
+      return aDouble;
+    }
 
-  public static class AddressDTO
-  {
-    private String street = "notNull";
-    private Integer houseNumber = Integer.MAX_VALUE;
-    private CityDTO city;
+    public void setaDouble(Double aDouble)
+    {
+      this.aDouble = aDouble;
+    }
 
-    public String getStreet(){return street;}
-    public void setStreet(String street){this.street = street;}
-    public Integer getHouseNumber(){return houseNumber;}
-    public void setHouseNumber(Integer houseNumber){this.houseNumber = houseNumber;}
-    public CityDTO getCity(){return city;}
-    public void setCity(CityDTO city){this.city = city;}
-  }
+    public Boolean getaBoolean()
+    {
+      return aBoolean;
+    }
 
-  public static class PersonDTO
-  {
-    private String firstname = "notNull";
-    private String lastname = "notNull";
-    private AddressDTO address;
-
-    public String getFirstname(){return firstname;}
-    public void setFirstname(String firstname){this.firstname = firstname;}
-    public String getLastname(){return lastname;}
-    public void setLastname(String lastname){this.lastname = lastname;}
-    public AddressDTO getAddress(){return address;}
-    public void setAddress(AddressDTO address){this.address = address;}
+    public void setaBoolean(Boolean aBoolean)
+    {
+      this.aBoolean = aBoolean;
+    }
   }
 
 
   @Test
   public void testNestedMapToObject()
   {
-    Map<String,Object> personMap = new HashMap<String,Object>();
-    personMap.put("firstname", "John");
-    personMap.put("lastname", null);
-
-    Map<String,Object> addressMap = new HashMap<String,Object>();
-    addressMap.put("street", "The Street");
-    addressMap.put("houseNumber", null);
-    personMap.put("address", addressMap);
-
-    Map<String,Object> cityMap = new HashMap<String,Object>();
-    cityMap.put("city", "The City");
-    cityMap.put("postcalCode", null);
-    addressMap.put("city", cityMap);
-
+    HashMap<String,Object> aMap = new HashMap<String,Object>();
+    aMap.put("aString", "theString");
+    aMap.put("aBoolean", Boolean.TRUE);
+    aMap.put("anInteger", 35);
+    aMap.put("aDouble",5.0d);
+    aMap.put("aDate",new Long(1392076800000l));
+    aMap.put("childDTO",aMap.clone());
 
     MapperFactory mapperFactory = MappingUtil.getMapperFactory();
 
-    //MapperFactory mapperFactory = new DefaultMapperFactory.Builder().compilerStrategy(new EclipseJdtCompilerStrategy()).build();
-
-    mapperFactory.classMap(java.util.Map.class,CityDO.class).mapNulls(true).byDefault().register();
-    mapperFactory.classMap(java.util.Map.class,AddressDO.class).mapNulls(true).byDefault().register();
-    mapperFactory.classMap(java.util.Map.class, PersonDO.class).mapNulls(true).byDefault().register();
-
-    //mapperFactory.classMap(CityDTO.class,CityDO.class).mapNulls(true).byDefault().register();
-    //mapperFactory.classMap(AddressDTO.class,AddressDO.class).mapNulls(true).byDefault().register();
-    //mapperFactory.classMap(PersonDTO.class, PersonDO.class).mapNulls(true).byDefault().register();
-
+    mapperFactory.classMap(java.util.Map.class,ExampleDTO.class).mapNulls(true).byDefault().register();
+    mapperFactory.classMap(ExampleDTO.class,ExampleDO.class).mapNulls(true).byDefault().register();
 
     MapperFacade mapper = mapperFactory.getMapperFacade();
 
-    PersonDO person = new PersonDO();
-    person.setLastname("notNull");
+    ExampleDTO exampleDTO = new ExampleDTO();
+    exampleDTO.setaDouble(2.0d);
+    exampleDTO.setAnInteger(30);
+    exampleDTO.setaString("foo");
+    exampleDTO.setaBoolean(Boolean.FALSE);
+    exampleDTO.setaDate(new Date());
 
+
+    mapper.map(aMap,exampleDTO);
+
+    Assert.assertEquals("theString",exampleDTO.getaString());
+    Assert.assertEquals(Boolean.TRUE,exampleDTO.getaBoolean());
+    Assert.assertEquals(new Integer(35),exampleDTO.getAnInteger());
+    Assert.assertEquals(new Double(5.0d),exampleDTO.getaDouble());
+
+
+    /*
     mapper.map(personMap,person);
 
     Assert.assertNotNull(person);
@@ -146,8 +186,8 @@ public class NestedMapsTestCase
     Assert.assertEquals("The Street",person.getAddress().getStreet());
     Assert.assertNull(person.getAddress().getHouseNumber());
     Assert.assertNotNull(person.getAddress().getCity());
-    Assert.assertNotNull(person.getAddress().getCity().getCity());
-    Assert.assertEquals("The City",person.getAddress().getCity().getCity());
+    Assert.assertNotNull(person.getAddress().getCity().getCityName());
+    Assert.assertEquals("The City",person.getAddress().getCity().getCityName());
     Assert.assertNull(person.getAddress().getCity().getPostalCode());
 
 
@@ -162,9 +202,9 @@ public class NestedMapsTestCase
     Assert.assertEquals("The Street",person.getAddress().getStreet());
     Assert.assertNull(person.getAddress().getHouseNumber());
     Assert.assertNotNull(person.getAddress().getCity());
-    Assert.assertNotNull(person.getAddress().getCity().getCity());
-    Assert.assertEquals("The City",person.getAddress().getCity().getCity());
+    Assert.assertNotNull(person.getAddress().getCity().getCityName());
+    Assert.assertEquals("The City",person.getAddress().getCity().getCityName());
     Assert.assertNull(person.getAddress().getCity().getPostalCode());
-
+       */
   }
 }
