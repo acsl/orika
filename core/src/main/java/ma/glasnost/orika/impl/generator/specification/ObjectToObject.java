@@ -25,6 +25,9 @@ import ma.glasnost.orika.impl.generator.SourceCodeContext;
 import ma.glasnost.orika.impl.generator.VariableRef;
 import ma.glasnost.orika.metadata.FieldMap;
 
+import java.util.Map;
+
+
 /**
  * ObjectToObject
  *
@@ -62,8 +65,25 @@ public class ObjectToObject extends AbstractSpecification {
                 ipStmt += statement(inverse.assign(destination.owner()));
             }
         }
-        
-        String mapNull = destination.isAssignable() && shouldMapNulls(fieldMap, code) ? format(" else {\n %s { %s; }\n}\n", destination.ifPathNotNull(), destination.assign("null")): "";
+
+        // here we construct the extra if clause that checks for the presence of the key in the map
+        // maybe this should better be checking if the source is a ma.glasnost.orika.metadata.MapKeyProperty
+        // instead of the raw type being assignable from Map.class
+        String ifContainsKeyInSourceMap = "";
+        //if (fieldMap.getAType().getRawType().isAssignableFrom(Map.class))
+        if (fieldMap.getSource().isMapKey())
+        {
+          code.debugField(fieldMap,"adding containsKey if clause");
+          ifContainsKeyInSourceMap = " if (source.containsKey(\"" + fieldMap.getSource().getName() + "\"))";
+        }
+
+        //String elseSetNull = shouldSetNull ? (" else "+ destinationNotNull +"{ \n" + ifContainsKeyInSourceMap + "{\n  " + destination.assignIfPossible("null")) + ";\n  } \n }" : "";
+
+        //return statement(source.ifNotNull() + "{ \n" + assureInstanceExists + statement) + "\n}" + elseSetNull;
+
+
+        String mapNull = destination.isAssignable() && shouldMapNulls(fieldMap, code) ? format(" else {\n %s {\n %s \n { %s; \n}\n}\n}\n", destination.ifPathNotNull(), ifContainsKeyInSourceMap, destination.assign("null")): "";
+
         return statement("%s { %s  %s } %s", source.ifNotNull(), mapStmt, ipStmt, mapNull);
         
     }

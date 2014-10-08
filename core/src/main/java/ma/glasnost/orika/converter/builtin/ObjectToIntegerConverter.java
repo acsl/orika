@@ -9,6 +9,18 @@ import ma.glasnost.orika.metadata.Type;
  */
 public class ObjectToIntegerConverter extends BuiltinCustomConverter<Object,Integer>
 {
+  /**
+   * use this converter only if the raw sourceType (during source code generation) `is exactly Object.class
+   * Otherwise this converter may be applied unwanted (eg when mapping String -> Integer which should be done by FromStringConverter)
+   * @param sourceType
+   * @param destinationType
+   * @return
+   */
+  public boolean canConvert(Type<?> sourceType, Type<?> destinationType)
+  {
+    return sourceType.getRawType().equals(Object.class) && this.destinationType.equals(destinationType);
+  }
+
   public Integer convert(Object source, Type<? extends Integer> destinationType)
   {
     if (source == null)

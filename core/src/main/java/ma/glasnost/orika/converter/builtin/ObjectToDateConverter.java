@@ -11,6 +11,17 @@ import java.util.Date;
  */
 public class ObjectToDateConverter extends BuiltinCustomConverter<Object,Date>
 {
+  /**
+   * use this converter only if the raw sourceType (during source code generation) `is exactly Object.class
+   * @param sourceType
+   * @param destinationType
+   * @return
+   */
+  public boolean canConvert(Type<?> sourceType, Type<?> destinationType)
+  {
+    return sourceType.getRawType().equals(Object.class) && this.destinationType.equals(destinationType);
+  }
+
   public Date convert(Object source, Type<? extends Date> destinationType)
   {
     if (source == null)
