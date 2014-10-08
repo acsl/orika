@@ -25,27 +25,8 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.generator.AggregateSpecification;
 import ma.glasnost.orika.impl.generator.CodeGenerationStrategy;
 import ma.glasnost.orika.impl.generator.Specification;
-import ma.glasnost.orika.impl.generator.specification.AnyTypeToString;
-import ma.glasnost.orika.impl.generator.specification.ApplyRegisteredMapper;
-import ma.glasnost.orika.impl.generator.specification.ArrayOrCollectionToArray;
-import ma.glasnost.orika.impl.generator.specification.ArrayOrCollectionToCollection;
-import ma.glasnost.orika.impl.generator.specification.ArrayOrCollectionToMap;
-import ma.glasnost.orika.impl.generator.specification.Convert;
-import ma.glasnost.orika.impl.generator.specification.ConvertArrayOrCollectionToArray;
-import ma.glasnost.orika.impl.generator.specification.ConvertArrayOrCollectionToCollection;
-import ma.glasnost.orika.impl.generator.specification.CopyByReference;
-import ma.glasnost.orika.impl.generator.specification.EnumToEnum;
-import ma.glasnost.orika.impl.generator.specification.MapToArray;
-import ma.glasnost.orika.impl.generator.specification.MapToCollection;
-import ma.glasnost.orika.impl.generator.specification.MapToMap;
-import ma.glasnost.orika.impl.generator.specification.MultiOccurrenceElementToObject;
-import ma.glasnost.orika.impl.generator.specification.MultiOccurrenceToMultiOccurrence;
-import ma.glasnost.orika.impl.generator.specification.ObjectToMultiOccurrenceElement;
-import ma.glasnost.orika.impl.generator.specification.ObjectToObject;
-import ma.glasnost.orika.impl.generator.specification.PrimitiveAndObject;
-import ma.glasnost.orika.impl.generator.specification.StringToEnum;
-import ma.glasnost.orika.impl.generator.specification.StringToStringConvertible;
-import ma.glasnost.orika.impl.generator.specification.UnmappableEnum;
+import ma.glasnost.orika.impl.generator.specification.*;
+
 
 /**
  * @author matt.deboer@gmail.com
@@ -61,7 +42,8 @@ public class DefaultCodeGenerationStrategy implements CodeGenerationStrategy {
         this.specifications = new CopyOnWriteArrayList<Specification>(
                 Arrays.asList(
                         new ConvertArrayOrCollectionToArray(),
-                        new ConvertArrayOrCollectionToCollection(), 
+                        new ConvertArrayOrCollectionToCollection(),
+                        new MapPropertyConvert(),
                         new Convert(), 
                         new CopyByReference(), 
                         new ApplyRegisteredMapper(),
