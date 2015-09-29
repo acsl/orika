@@ -28,6 +28,8 @@ public class ObjectToDoubleConverter extends BuiltinCustomConverter<Object,Doubl
       return (Double)source;
     else if (source instanceof Integer)
       return new Double((Integer)source);
+    else if (source instanceof Long)
+      return new Double((Long)source);
     else
       throw new RuntimeException("unable to convert object of type " + source.getClass() + " to " + getBType());
   }
